@@ -1,5 +1,9 @@
 # RefreshRecyclerView
 
+可以上拉加载，下拉刷新
+空数据展示的布局
+网络加载失败的布局
+
 ## 布局
 ```
 <com.xhe.refreshrecycler.RefreshRecyclerView
