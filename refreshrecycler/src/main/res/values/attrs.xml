@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Declare custom theme attributes that allow changing which styles are
+         used for button bars depending on the API level.
+         ?android:attr/buttonBarStyle is new as of API 11 so this is
+         necessary to support previous API levels. -->
+    <declare-styleable name="refresh_layout">
+        <attr name="enabled_refresh" format="boolean" />
+        <attr name="enabled_loadmore" format="boolean" />
+        <attr name="page_count" format="integer" />
+        <attr name="layout_failure" format="reference" />
+        <attr name="layout_empty" format="reference" />
+        <attr name="column_num" format="integer" />
+        <attr name="rv_layout_manager">
+            <enum name="LinearLayoutManager" value="0" />
+            <enum name="GridLayoutManager" value="1" />
+            <enum name="StaggeredGridLayoutManager" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>
