@@ -23,36 +23,28 @@ public abstract class SBaseAdapter<T> extends BaseAdapter {
     private int mItemLayoutId;
 
     public SBaseAdapter(Context context) {
-        this.mContext = context;
-        this.mInflater = LayoutInflater.from(mContext);
-        this.mItemLayoutId = new LinearLayout(mContext).getId();
-        this.list = new ArrayList<T>();
-
+        // TODO Auto-generated constructor stub
+        this(context, null);
     }
 
-    public SBaseAdapter(Context context, List<T> list) {
-        this.mContext = context;
-        this.mInflater = LayoutInflater.from(mContext);
-        this.mItemLayoutId = new LinearLayout(mContext).getId();
-        this.list = list;
+    public SBaseAdapter(Context context, List list) {
+        this(context, list, new LinearLayout(context).getId());
+    }
 
+    public SBaseAdapter(Context context, int itemLayoutId) {
+        this(context, null, itemLayoutId);
     }
 
     public SBaseAdapter(Context context, List<T> list, int itemLayoutId) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(mContext);
         this.mItemLayoutId = itemLayoutId;
+        if (list == null) {
+            list = new ArrayList<>();
+        }
         this.list = list;
-
     }
 
-    public SBaseAdapter(Context context, int itemLayoutId) {
-        this.mContext = context;
-        this.mInflater = LayoutInflater.from(mContext);
-        this.mItemLayoutId = itemLayoutId;
-        this.list = new ArrayList<T>();
-
-    }
 
     public void setitemLayoutId(int itemLayoutId) {
         this.mItemLayoutId = itemLayoutId;
@@ -68,11 +60,17 @@ public abstract class SBaseAdapter<T> extends BaseAdapter {
     }
 
     public void appendList(List<T> list) {
+        if (list == null) {
+            list = new ArrayList<>();
+        }
         this.list = list;
         notifyDataSetChanged();
     }
 
     public void addList(List<T> list2) {
+        if (list2 == null) {
+            list2 = new ArrayList<>();
+        }
         this.list.addAll(list2);
         notifyDataSetChanged();
     }

@@ -27,37 +27,33 @@ public class SBAdapter<T> extends BaseAdapter implements BAdapter<BaseAdapter> {
 
     public SBAdapter(Context context) {
         // TODO Auto-generated constructor stub
-        this.mContext = context;
-        this.mInflater = LayoutInflater.from(mContext);
-        this.mItemLayoutId = new LinearLayout(mContext).getId();
-        this.list = new ArrayList<>();
+        this(context, null);
     }
 
     public SBAdapter(Context context, List list) {
-        this.mContext = context;
-        this.mInflater = LayoutInflater.from(mContext);
-        this.mItemLayoutId = new LinearLayout(mContext).getId();
-        this.list = list;
+        this(context,list,new LinearLayout(context).getId());
+    }
 
+    public SBAdapter(Context context, int itemLayoutId) {
+        this(context,null,itemLayoutId);
     }
 
     public SBAdapter(Context context, List list, int itemLayoutId) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(mContext);
         this.mItemLayoutId = itemLayoutId;
+        if (list == null) {
+            list = new ArrayList<>();
+        }
         this.list = list;
 
     }
 
-    public SBAdapter(Context context, int itemLayoutId) {
-        this.mContext = context;
-        this.mInflater = LayoutInflater.from(mContext);
-        this.mItemLayoutId = itemLayoutId;
-        this.list = new ArrayList();
-
-    }
 
     public SBAdapter<T> list(List list) {
+        if (list == null) {
+            list = new ArrayList<>();
+        }
         this.list = list;
         return this;
     }
@@ -86,6 +82,9 @@ public class SBAdapter<T> extends BaseAdapter implements BAdapter<BaseAdapter> {
 
     @Override
     public void appendList(List list) {
+        if (list == null) {
+            list = new ArrayList<>();
+        }
         // TODO Auto-generated method stub
         this.list = list;
         notifyDataSetChanged();
@@ -103,6 +102,9 @@ public class SBAdapter<T> extends BaseAdapter implements BAdapter<BaseAdapter> {
 
     @Override
     public void addList(List list2) {
+        if (list2 == null) {
+            list2 = new ArrayList<>();
+        }
         // TODO Auto-generated method stub
         this.list.addAll(list2);
         notifyDataSetChanged();

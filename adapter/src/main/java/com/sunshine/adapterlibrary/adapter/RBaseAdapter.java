@@ -23,19 +23,15 @@ public abstract class RBaseAdapter<T> extends Adapter<RViewHolder> {
     private int mItemLayoutId;
 
     public RBaseAdapter(Context context) {
-        this.mContext = context;
-        this.mInflater = LayoutInflater.from(mContext);
-        this.mItemLayoutId = new LinearLayout(mContext).getId();
-        this.list = new ArrayList<T>();
-
+        this(context, null);
     }
 
-    public RBaseAdapter(Context context, List<T> list) {
-        this.mContext = context;
-        this.mInflater = LayoutInflater.from(mContext);
-        this.mItemLayoutId = new LinearLayout(mContext).getId();
-        this.list = list;
+    public RBaseAdapter(Context context, List list) {
+        this(context, list, 0);
+    }
 
+    public RBaseAdapter(Context context, int itemLayoutId) {
+        this(context, null, itemLayoutId);
     }
 
     public RBaseAdapter(Context context, List<T> list, int itemLayoutId) {
@@ -46,13 +42,6 @@ public abstract class RBaseAdapter<T> extends Adapter<RViewHolder> {
 
     }
 
-    public RBaseAdapter(Context context, int itemLayoutId) {
-        this.mContext = context;
-        this.mInflater = LayoutInflater.from(mContext);
-        this.mItemLayoutId = itemLayoutId;
-        this.list = new ArrayList<T>();
-
-    }
 
     public void setitemLayoutId(int itemLayoutId) {
         this.mItemLayoutId = itemLayoutId;

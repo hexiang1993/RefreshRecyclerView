@@ -3,12 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
+    android:orientation="horizontal">
 
     <com.xhe.refreshrecycler.RefreshRecyclerView
         android:id="@+id/refresh"
         style="@style/base_refresh_layout_xhe"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#ff7700"
+        android:visibility="gone"
+        />
 
 </LinearLayout>

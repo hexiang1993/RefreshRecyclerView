@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+//apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 27
@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 3
-        versionName "0.0.3"
+        versionCode 5
+        versionName "0.0.5"
     }
 
     lintOptions {
@@ -17,19 +17,19 @@ android {
     }
 
 }
-publish {
-    userOrg = 'xhe'//bintray.com用户名
-    groupId = 'com.xhe'//jcenter上的路径
-    artifactId = 'RefreshRecyclerview'//项目名称
-    publishVersion = '0.0.3'//版本号
-    desc = '带刷新的列表'//描述，不重要
-    website = 'https://github.com/hexiang1993/RefreshRecyclerView'
-}
+//publish {
+//    userOrg = 'xhe'//bintray.com用户名
+//    groupId = 'com.xhe'//jcenter上的路径
+//    artifactId = 'RefreshRecyclerview'//项目名称
+//    publishVersion = '0.0.5'//版本号
+//    desc = '带刷新的列表'//描述，不重要
+//    website = 'https://github.com/hexiang1993/RefreshRecyclerView'
+//}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:27.1.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    implementation 'com.android.support:recyclerview-v7:25.3.1'
     //刷新布局
     //compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4'//没有使用特殊Header，可以不加这行
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4'
