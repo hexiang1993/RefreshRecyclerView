@@ -15,13 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.gengqiquan.adapter.interfaces.BAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.sunshine.adapterlibrary.interfaces.BAdapter;
 import com.xhe.refreshrecycler.interfaces.LoadmoreListener;
 import com.xhe.refreshrecycler.interfaces.RefreshListener;
 import com.xhe.refreshrecycler.utils.ResourceUtil;

@@ -8,9 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.gengqiquan.adapter.adapter.RBAdapter;
-import com.gengqiquan.adapter.interfaces.Converter;
-import com.gengqiquan.adapter.interfaces.Holder;
+import com.sunshine.adapterlibrary.adapter.RBAdapter;
+import com.sunshine.adapterlibrary.interfaces.Converter;
+import com.sunshine.adapterlibrary.interfaces.Holder;
 import com.xhe.refreshrecycler.RefreshRecyclerView;
 import com.xhe.refreshrecycler.SimpleEmptyView;
 import com.xhe.refreshrecycler.interfaces.LoadmoreListener;
@@ -29,20 +29,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         refreshRv = findViewById(R.id.refresh);
-        View emptyView = LayoutInflater.from(this).inflate(R.layout.layout_empty_view111,null);
+        View emptyView = LayoutInflater.from(this).inflate(R.layout.layout_empty_view111, null);
         TextView tvMsg = emptyView.findViewById(R.id.tv_msg);
         tvMsg.setText("重新设置空布局");
         refreshRv
-                .setAdapter(new RBAdapter<String>(this)
+                .setAdapter(new RBAdapter<String>(MainActivity.this)
                         .layout(R.layout.item_list)
                         .bindViewData(new Converter<String>() {
                             @Override
-                            public void convert(Holder holder, String item) {
-                                holder.setText(R.id.text, item);
+                            public void convert(Holder holder, String data) {
+                                TextView textView = holder.getView(R.id.text);
+                                textView.setText(data);
+
+//                                holder.setText(R.id.text,data);
                             }
                         }))
                 .setPageCount(10)
-                .setLayoutEmpty(new SimpleEmptyView(this).setIconSize(100,100).setTextSize(14))
+                .setLayoutEmpty(new SimpleEmptyView(this).setIconSize(100, 100).setTextSize(14))
 //                .setLayoutEmpty(emptyView)
 //                .setLayoutFailure(R.layout.layout_bad_network111)
                 .setEnabledLoadmore(true)
@@ -92,13 +95,12 @@ public class MainActivity extends AppCompatActivity {
                         }
 
 
-
                         if (isrefresh) {
                             refreshRv.finishRefresh(list, true);
                         } else {
-                            if (count==2){
-                                refreshRv.finishLoadmore(null,false);
-                            }else {
+                            if (count == 2) {
+                                refreshRv.finishLoadmore(null, false);
+                            } else {
                                 refreshRv.finishLoadmore(list, true);
                             }
                         }
