@@ -5,6 +5,8 @@
         <!-- Customize your theme here. -->
         <item name="enabled_refresh">false</item>
         <item name="enabled_loadmore">true</item>
+        <item name="enabled_showempty">true</item>
+        <item name="enabled_showfailure">true</item>
         <item name="layout_failure">@layout/layout_bad_network111</item>
         <item name="layout_empty">@layout/layout_empty_view111</item>
         <item name="page_count">10</item><!--每页显示的数量-->

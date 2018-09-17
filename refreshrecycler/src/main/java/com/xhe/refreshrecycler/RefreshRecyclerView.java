@@ -39,6 +39,11 @@ public class RefreshRecyclerView extends RelativeLayout {
     private boolean enabledRefresh = true;
     //是否可以加载更多
     private boolean enabledLoadmore = false;
+    //在数据为空的时候，是否展示空数据布局
+    private boolean enabledShowEmpty = false;
+    //在加载失败的时候是否展示失败布局
+    private boolean enabledShowFailure = false;
+
     //是否正在加载更多
     private boolean isLoadmore = false;
 
@@ -47,7 +52,7 @@ public class RefreshRecyclerView extends RelativeLayout {
     //数据获取失败展示的布局
     private RelativeLayout layoutFailure;
     //每页展示的数量
-    private int pageCount;
+    private int pageCount = 10;
     private SmartRefreshLayout refreshLayout;
     private RecyclerView recyclerView;
     private BAdapter adapter;
@@ -57,6 +62,7 @@ public class RefreshRecyclerView extends RelativeLayout {
     private LoadmoreListener loadmoreListener;
 
     private LayoutParams LP_RL = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
 
     public RefreshRecyclerView(Context context) {
         this(context, null);
@@ -76,11 +82,16 @@ public class RefreshRecyclerView extends RelativeLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.refresh_layout);
         enabledRefresh = typedArray.getBoolean(R.styleable.refresh_layout_enabled_refresh, true);
         enabledLoadmore = typedArray.getBoolean(R.styleable.refresh_layout_enabled_loadmore, false);
+        enabledShowEmpty = typedArray.getBoolean(R.styleable.refresh_layout_enabled_showempty, false);
+        enabledShowFailure = typedArray.getBoolean(R.styleable.refresh_layout_enabled_showfailure, false);
+        enabledLoadmore = typedArray.getBoolean(R.styleable.refresh_layout_enabled_loadmore, false);
         pageCount = typedArray.getInteger(R.styleable.refresh_layout_page_count, 10);
 
         int columnNum = typedArray.getInteger(R.styleable.refresh_layout_column_num, 1);
         int layoutType = typedArray.getInteger(R.styleable.refresh_layout_rv_layout_manager, 0);
 
+        setEnabledShowEmpty(enabledShowFailure);
+        setEnabledShowFailure(enabledShowFailure);
         setLayoutManager(getDefaultLayoutManager(layoutType, columnNum));
         setLayoutFailure(typedArray.getResourceId(R.styleable.refresh_layout_layout_failure, 0));
         setLayoutEmpty(typedArray.getResourceId(R.styleable.refresh_layout_layout_empty, 0));
@@ -97,13 +108,13 @@ public class RefreshRecyclerView extends RelativeLayout {
         recyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         refreshLayout.addView(recyclerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
-        layoutEmpty = new RelativeLayout(context);
-        addView(layoutEmpty, LP_RL);
-        layoutEmpty.setVisibility(GONE);
-
-        layoutFailure = new RelativeLayout(context);
-        addView(layoutFailure, LP_RL);
-        layoutFailure.setVisibility(GONE);
+//        layoutEmpty = new RelativeLayout(context);
+//        addView(layoutEmpty, LP_RL);
+//        layoutEmpty.setVisibility(GONE);
+//
+//        layoutFailure = new RelativeLayout(context);
+//        addView(layoutFailure, LP_RL);
+//        layoutFailure.setVisibility(GONE);
 
     }
 
@@ -218,11 +229,35 @@ public class RefreshRecyclerView extends RelativeLayout {
     }
 
     /**
+     * 是否需要展示空数据布局
+     *
+     * @param showEmpty
+     * @return
+     */
+    public RefreshRecyclerView setEnabledShowEmpty(boolean showEmpty) {
+        enabledShowEmpty = showEmpty;
+        if (showEmpty) {
+            layoutEmpty = new RelativeLayout(context);
+            addView(layoutEmpty, LP_RL);
+            layoutEmpty.setVisibility(GONE);
+        } else {
+            if (layoutEmpty != null) {
+                removeView(layoutEmpty);
+            }
+        }
+        return this;
+    }
+
+
+    /**
      * 空布局View
      *
      * @param view
      */
     public RefreshRecyclerView setLayoutEmpty(@NonNull View view) {
+        if (!enabledShowEmpty) {
+            return this;
+        }
         this.layoutEmpty.removeAllViews();
         LayoutParams lp = (LayoutParams) view.getLayoutParams();
         if (lp == null) {
@@ -249,12 +284,37 @@ public class RefreshRecyclerView extends RelativeLayout {
         return this;
     }
 
+
+    /**
+     * 是否需要展示失败布局
+     *
+     * @param showFailure
+     * @return
+     */
+    public RefreshRecyclerView setEnabledShowFailure(boolean showFailure) {
+        enabledShowFailure = showFailure;
+        if (showFailure) {
+            layoutFailure = new RelativeLayout(context);
+            addView(layoutFailure, LP_RL);
+            layoutFailure.setVisibility(GONE);
+        } else {
+            if (layoutFailure != null) {
+                removeView(layoutFailure);
+            }
+        }
+        return this;
+    }
+
     /**
      * 失败布局View
      *
      * @param view
      */
     public RefreshRecyclerView setLayoutFailure(@NonNull View view) {
+        if (!enabledShowFailure) {
+            return this;
+        }
+
         this.layoutFailure.removeAllViews();
         LayoutParams lp = (LayoutParams) view.getLayoutParams();
         if (lp == null) {
@@ -338,10 +398,14 @@ public class RefreshRecyclerView extends RelativeLayout {
         if (!success) {
             refreshLayout.finishRefresh(false);
             refreshLayout.setVisibility(GONE);
-            layoutFailure.setVisibility(VISIBLE);
+            if (layoutFailure != null) {
+                layoutFailure.setVisibility(VISIBLE);
+            }
             return;
         }
-        layoutFailure.setVisibility(GONE);
+        if (layoutFailure != null) {
+            layoutFailure.setVisibility(GONE);
+        }
         if (null == list) {
             list = new ArrayList();
         }
@@ -349,10 +413,14 @@ public class RefreshRecyclerView extends RelativeLayout {
         refreshLayout.finishRefresh(true);
         if (list.size() == 0) {
             refreshLayout.setVisibility(GONE);
-            layoutEmpty.setVisibility(VISIBLE);
+            if (layoutEmpty != null) {
+                layoutEmpty.setVisibility(VISIBLE);
+            }
         } else {
             refreshLayout.setVisibility(VISIBLE);
-            layoutEmpty.setVisibility(GONE);
+            if (layoutEmpty != null) {
+                layoutEmpty.setVisibility(GONE);
+            }
             if (list.size() >= pageCount) {
                 refreshLayout.setLoadmoreFinished(false);
             } else {

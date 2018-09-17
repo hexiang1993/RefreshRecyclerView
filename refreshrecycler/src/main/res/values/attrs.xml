@@ -7,6 +7,8 @@
     <declare-styleable name="refresh_layout">
         <attr name="enabled_refresh" format="boolean" />
         <attr name="enabled_loadmore" format="boolean" />
+        <attr name="enabled_showempty" format="boolean" />
+        <attr name="enabled_showfailure" format="boolean" />
         <attr name="page_count" format="integer" />
         <attr name="layout_failure" format="reference" />
         <attr name="layout_empty" format="reference" />

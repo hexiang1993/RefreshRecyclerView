@@ -68,7 +68,7 @@ public class SimpleEmptyView extends RelativeLayout {
      * @return
      */
     public SimpleEmptyView setLabelIcon(@DrawableRes int resId) {
-        ivIcon.setImageDrawable(getResources().getDrawable(R.drawable.img_no_message));
+        ivIcon.setImageResource(resId);
         return this;
     }
 
