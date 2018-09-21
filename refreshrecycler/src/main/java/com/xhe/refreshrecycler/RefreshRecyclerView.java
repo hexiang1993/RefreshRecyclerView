@@ -178,6 +178,7 @@ public class RefreshRecyclerView extends RelativeLayout {
     public RefreshRecyclerView setEnabledRefresh(boolean enabledRefresh) {
         this.enabledRefresh = enabledRefresh;
         refreshLayout.setEnableRefresh(enabledRefresh);
+        refreshLayout.setEnableHeaderTranslationContent(enabledRefresh);
         return this;
     }
 
@@ -208,6 +209,7 @@ public class RefreshRecyclerView extends RelativeLayout {
     public RefreshRecyclerView setEnabledLoadmore(boolean enabledLoadmore) {
         this.enabledLoadmore = enabledLoadmore;
         refreshLayout.setEnableLoadmore(enabledLoadmore);
+        refreshLayout.setEnableFooterTranslationContent(enabledLoadmore);
         return this;
     }
 

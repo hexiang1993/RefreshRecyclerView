@@ -3,10 +3,10 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 25
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 14
         targetSdkVersion 25
-        versionCode 102
-        versionName "1.0.2"
+        versionCode 103
+        versionName "1.0.3"
     }
 
     lintOptions {
@@ -19,7 +19,7 @@ android {
 //    userOrg = 'xhe'//bintray.com用户名
 //    groupId = 'com.xhe'//jcenter上的路径
 //    artifactId = 'baseadapter'//项目名称
-//    publishVersion = '1.0.2'//版本号
+//    publishVersion = '1.0.3'//版本号
 //    desc = 'baseadapter'//描述，不重要
 //    website = 'https://github.com/hexiang1993/RefreshRecyclerView'
 //}

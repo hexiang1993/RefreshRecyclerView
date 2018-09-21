@@ -33,9 +33,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        refreshRv = findViewById(R.id.refresh);
-        listView = findViewById(R.id.listview);
+        refreshRv = (RefreshRecyclerView) findViewById(R.id.refresh);
+        listView = (ListView) findViewById(R.id.listview);
         adapter = new SPAdapter<>(this);
+        adapter.notifyDataChanged();
         listView.setAdapter(adapter
                 .layout(R.layout.item_list)
                 .list(listData)
@@ -56,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
         View emptyView = LayoutInflater.from(this).inflate(R.layout.layout_empty_view111, null);
         TextView tvMsg = emptyView.findViewById(R.id.tv_msg);
         tvMsg.setText("重新设置空布局");
+
+        RPAdapter<String> rpAdapter = new RPAdapter<>(this);
         refreshRv
-                .setAdapter(new RPAdapter<String>(this)
+                .setAdapter(rpAdapter
                         .layout(R.layout.item_list)
                         .bindPositionData(new PConverter<String>() {
                             @Override
@@ -80,8 +83,8 @@ public class MainActivity extends AppCompatActivity {
                 .setLayoutEmpty(new SimpleEmptyView(this).setIconSize(100, 100).setTextSize(14))
 //                .setLayoutEmpty(emptyView)
 //                .setLayoutFailure(R.layout.layout_bad_network111)
-                .setEnabledLoadmore(true)
-                .setEnabledRefresh(true)
+                .setEnabledLoadmore(false)
+                .setEnabledRefresh(false)
                 .setOnRefreshListener(new RefreshListener() {
                     @Override
                     public void onRefrsh() {
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                                 list.add(" 数据 ---- " + i);
                             }
                         } else {
-                            for (int i = count * 10; i < (count + 1) * 10; i++) {
+                            for (int i = count * 10; i < (count + 1) * 8; i++) {
                                 list.add(" 数据 ---- " + i);
                             }
                         }
