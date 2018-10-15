@@ -152,3 +152,63 @@
 
 ```
 
+# 简易Adapter
+
+## ListView/GridView的Adapter
+
+#### 如果不需要position信息，可以直接使用SBAdapter
+```
+        listView.setAdapter(new SBAdapter<String>(context)
+                .layout(R.layout.item_list)
+                .list(listData)
+                .bindViewData(new Converter<String>() {
+                    @Override
+                    public void convert(Holder holder, String data) {
+                        TextView textView = holder.getView(R.id.text);
+                        textView.setText(data);
+
+                        ImageView imageView = holder.getView(R.id.imageview);
+                        imageView.setImageResource(R.drawable.message_default);
+                    }
+                }));
+```
+#### 如果需要position信息，使用SPAdapter，回调中会返回position
+```
+        listView.setAdapter(new SPAdapter<String>(context)
+                .layout(R.layout.item_list)
+                .list(listData)
+                .bindPositionData(new PConverter<String>() {
+                    @Override
+                    public void convert(Holder holder, String data, int pos) {
+                        //单纯的给view设置文字图片，可以使用以下简单方式
+                        holder.setText(R.id.text, data);
+                        holder.setImageResource(R.id.imageview, R.drawable.message_default);
+                    }
+                }));
+
+```
+
+## RecyclerView的Adapter
+
+#### RBAdapter：没有position
+#### RPAdapter：有position
+
+```
+        refreshRv
+                .setAdapter(new RPAdapter<String>(context)
+                        .layout(R.layout.item_list)
+                        .bindPositionData(new PConverter<String>() {
+                            @Override
+                            public void convert(Holder holder, String data, int pos) {
+                                TextView textView = holder.getView(R.id.text);
+
+                                if (pos > 10 && pos < 18) {
+
+                                } else {
+                                    textView.setText(data);
+                                }
+                            }
+                        }))
+
+
+```
