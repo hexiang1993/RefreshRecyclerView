@@ -57,6 +57,9 @@ public class RPAdapter<T> extends Adapter<RViewHolder> implements BAdapter<Adapt
     }
 
     public RPAdapter<T> list(List list) {
+        if (list == null) {
+            list = new ArrayList<>();
+        }
         this.mList = list;
         return this;
     }
@@ -80,6 +83,9 @@ public class RPAdapter<T> extends Adapter<RViewHolder> implements BAdapter<Adapt
 
     @Override
     public void appendList(List list) {
+        if (list == null) {
+            list = new ArrayList<>();
+        }
         this.mList = list;
         notifyDataSetChanged();
     }
@@ -95,8 +101,11 @@ public class RPAdapter<T> extends Adapter<RViewHolder> implements BAdapter<Adapt
     }
 
     @Override
-    public void addList(List list2) {
-        this.mList.addAll(list2);
+    public void addList(List list) {
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        this.mList.addAll(list);
 
         notifyDataSetChanged();
     }

@@ -7,8 +7,9 @@
 
     <ImageView
         android:id="@+id/iv_empty"
-        android:layout_width="150dp"
-        android:layout_height="150dp" />
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/img_no_message"/>
 
     <TextView
         android:id="@+id/tv_msg"
