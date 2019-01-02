@@ -16,6 +16,10 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreater;
+import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreater;
+import com.scwang.smartrefresh.layout.api.RefreshFooter;
+import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
@@ -100,8 +104,6 @@ public class RefreshRecyclerView extends RelativeLayout {
 
     private void initView() {
         refreshLayout = new SmartRefreshLayout(context);
-        refreshLayout.setRefreshHeader(new ClassicsHeader(context));
-        refreshLayout.setRefreshFooter(new ClassicsFooter(context));
         addView(refreshLayout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
         recyclerView = new RecyclerView(context);
@@ -166,6 +168,28 @@ public class RefreshRecyclerView extends RelativeLayout {
      */
     public RefreshRecyclerView setPageCount(int pageCount) {
         this.pageCount = pageCount;
+        return this;
+    }
+
+    /**
+     * 设置下拉刷新的头部view
+     * 可设置默认头部：SmartRefreshLayout.setDefaultRefreshHeaderCreater
+     * @param refreshHeader
+     * @return
+     */
+    public RefreshRecyclerView setRefreshHeader(RefreshHeader refreshHeader){
+        refreshLayout.setRefreshHeader(refreshHeader);
+        return this;
+    }
+
+    /**
+     * 设置加载更多的底部view
+     * 可设置默认底部：SmartRefreshLayout.setDefaultRefreshFooterCreater
+     * @param refreshFooter
+     * @return
+     */
+    public RefreshRecyclerView setRefreshHeader(RefreshFooter refreshFooter){
+        refreshLayout.setRefreshFooter(refreshFooter);
         return this;
     }
 

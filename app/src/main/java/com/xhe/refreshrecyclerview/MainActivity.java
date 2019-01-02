@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPageCount(15)
                 .setEnabledShowEmpty(true)
                 .setEnabledShowFailure(true)
-//                .setLayoutEmpty(new SimpleEmptyView(this).setIconSize(100, 100).setLabelText("暂无数据").setTextSize(14))
+                .setLayoutEmpty(new SimpleEmptyView(this).setLabelText("暂无数据").setTextSize(14))
 //                .setLayoutEmpty(R.layout.layout_empty_view111)
 //                .setLayoutEmpty(emptyView)
                 .setLayoutFailure(R.layout.layout_bad_network111)

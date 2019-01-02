@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:text="当前网络不太好"
+            android:text="网络不太好"
             android:textColor="#999999"
             android:textSize="14sp" />
 
@@ -31,16 +31,16 @@
             android:id="@+id/reload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:layout_marginTop="30dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
             android:background="@drawable/bg_round_gray"
             android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="5dp"
             android:text="重新加载"
-            android:textColor="#ff8855"
+            android:textColor="#fff"
             android:textSize="16sp" />
     </LinearLayout>
 

@@ -56,8 +56,8 @@ public class SimpleEmptyView extends RelativeLayout {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         params.addRule(RelativeLayout.CENTER_IN_PARENT);
         addView(linearLayout, params);
-        tvContent.setText("暂无数据暂无数据暂无数据暂无数据暂无数据暂无数据暂无数据暂无数据");
-        ivIcon.setImageDrawable(getResources().getDrawable(R.drawable.img_no_message));
+        tvContent.setText("暂无数据");
+        setLabelIcon(R.drawable.img_no_message);
     }
 
 
@@ -69,6 +69,7 @@ public class SimpleEmptyView extends RelativeLayout {
      */
     public SimpleEmptyView setLabelIcon(@DrawableRes int resId) {
         ivIcon.setImageResource(resId);
+        setIconSize(100,100);
         return this;
     }
 

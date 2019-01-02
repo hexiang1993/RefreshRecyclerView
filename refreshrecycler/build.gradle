@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 18
-        versionName "0.1.8"
+        versionCode 22
+        versionName "0.2.2"
     }
 
     lintOptions {
@@ -21,7 +21,7 @@ publish {
     userOrg = 'xhe'//bintray.com用户名
     groupId = 'com.xhe'//jcenter上的路径
     artifactId = 'RefreshRecyclerview'//项目名称
-    publishVersion = '0.1.8'//版本号
+    publishVersion = '0.2.2'//版本号
     desc = '带刷新的列表'//描述，不重要
     website = 'https://github.com/hexiang1993/RefreshRecyclerView'
 }
